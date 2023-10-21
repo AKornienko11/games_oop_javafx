@@ -23,9 +23,9 @@ public class BishopBlack implements Figure {
         isDiagonal(pos, dest);
         Cell[] steps = new Cell[size];
         for (int index = 0; index < size; index++) {
-            int deltaX = pos.getX() +1 + index ;
-            int deltaY =pos.getY() +1 + index;
-            steps[index] = Cell.findBy(deltaX,deltaY);
+            int deltaX = pos.getX() + 1 + index;
+            int deltaY = pos.getY() + 1 + index;
+            steps[index] = Cell.findBy(deltaX, deltaY);
         }
         return steps;
     }

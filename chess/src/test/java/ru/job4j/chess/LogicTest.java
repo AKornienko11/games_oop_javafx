@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class LogicTest {
 
     @Test
-    public void whenMoveThenFigureNotFoundException() throws  ImpossibleMoveException {
+    public void whenMoveThenFigureNotFoundException() throws ImpossibleMoveException {
 
         Logic logic = new Logic();
         FigureNotFoundException exception = assertThrows(FigureNotFoundException.class, () -> {
@@ -25,20 +25,20 @@ public class LogicTest {
     @Test
     void whenMoveThenOccupiedCellException() throws OccupiedCellException {
         Logic logic = new Logic();
-        Exception exception = assertThrows(OccupiedCellException.class,() -> {
+        Exception exception = assertThrows(OccupiedCellException.class, () -> {
             logic.move(Cell.C1, Cell.G6);
         });
         assertThat(exception.getMessage()).isEqualTo("the Cell is occupied");
     }
 
-        @Test
-        void whenMoveThenImpossibleMoveException() throws ImpossibleMoveException {
-            BishopBlack bishopBlack = new BishopBlack(Cell.C1);
-            Logic logic = new Logic();
-            ImpossibleMoveException exception = assertThrows(ImpossibleMoveException.class,() -> {
-               logic.move(bishopBlack.position(), Cell.G6);
-            });
-            assertThat(exception.getMessage()).isEqualTo((String.format(
-                    "Could not way by diagonal from %s to %s", Cell.C1, Cell.G5)));
-        }
+    @Test
+    void whenMoveThenImpossibleMoveException() throws ImpossibleMoveException {
+        BishopBlack bishopBlack = new BishopBlack(Cell.C1);
+        Logic logic = new Logic();
+        ImpossibleMoveException exception = assertThrows(ImpossibleMoveException.class, () -> {
+            logic.move(bishopBlack.position(), Cell.G6);
+        });
+        assertThat(exception.getMessage()).isEqualTo((String.format(
+                "Could not way by diagonal from %s to %s", Cell.C1, Cell.G5)));
     }
+}
