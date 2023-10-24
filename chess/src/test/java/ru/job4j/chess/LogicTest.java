@@ -9,11 +9,10 @@ import ru.job4j.chess.firuges.black.KingBlack;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class LogicTest {
+class LogicTest {
 
     @Test
-    public void whenMoveThenFigureNotFoundException() throws ImpossibleMoveException {
-
+    public void whenThenFigureNotFoundException() {
         Logic logic = new Logic();
         FigureNotFoundException exception = assertThrows(FigureNotFoundException.class, () -> {
             logic.move(Cell.C1, Cell.G5);
@@ -22,29 +21,24 @@ public class LogicTest {
     }
 
     @Test
-    void whenMoveThenImpossibleMoveException() throws ImpossibleMoveException {
+    public void whenImpossibleMoveException() throws ImpossibleMoveException {
         Logic logic = new Logic();
-        BishopBlack bishopBlack = new BishopBlack(Cell.C1);
-        Figure[] figures = new Figure[]{null, null, bishopBlack};
-        ImpossibleMoveException exception = assertThrows(ImpossibleMoveException.class, () -> {
+        logic.add(new BishopBlack(Cell.C1));
+        ImpossibleMoveException ex = assertThrows(ImpossibleMoveException.class, () -> {
             logic.move(Cell.C1, Cell.G6);
         });
-        assertThat(exception.getMessage()).isEqualTo((String.format(
-                "Could not way by diagonal from %s to %s", Cell.C1, Cell.G6)));
+        assertThat(ex.getMessage()).isEqualTo(String.format(
+                "Could not way by diagonal from %s to %s", Cell.C1, Cell.G6));
     }
 
     @Test
-    void whenMoveOccupiedCellException() throws OccupiedCellException {
+    public void whenOccupiedCellException() {
         Logic logic = new Logic();
-        BishopBlack bishopBlack = new BishopBlack(Cell.C1);
-        KingBlack kingBlack = new KingBlack(Cell.F4);
-        Cell[] steps = new Cell[]{Cell.D2, Cell.E3, Cell.F4, Cell.G5};
-        Figure[] figures = new Figure[]{null, null, bishopBlack};
-        ImpossibleMoveException exception = assertThrows(ImpossibleMoveException.class, () -> {
+        logic.add(new BishopBlack(Cell.C1));
+        logic.add(new KingBlack(Cell.G5));
+        OccupiedCellException exception = assertThrows(OccupiedCellException.class, () -> {
             logic.move(Cell.C1, Cell.G5);
         });
-        assertThat(exception.getMessage()).isEqualTo((String.format(
-                "Could not way by diagonal from %s to %s", Cell.C1, Cell.G5)));
+        assertThat(exception.getMessage()).isEqualTo("the Cell is occupied");
     }
-
 }

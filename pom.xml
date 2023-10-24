@@ -17,10 +17,6 @@
 
     <modules>
         <module>chess</module>
-        <module>tictactoe</module>
-        <module>seabattle</module>
-        <module>puzzle</module>
-        <module>packman</module>
     </modules>
 
     <dependencies>

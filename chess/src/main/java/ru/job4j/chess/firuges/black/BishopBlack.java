@@ -23,14 +23,14 @@ public class BishopBlack implements Figure {
             throw new ImpossibleMoveException(String.format(
                     "Could not way by diagonal from %s to %s", position, dest));
         }
-        int size = dest.getX() - position.getX();
+        int size = Math.abs(dest.getX() - position.getX());
         Cell[] steps = new Cell[size];
-        int deltaX = position.getX();
-        int deltaY = position.getY();
+        int x = position.getX();
+        int y = position.getY();
         for (int i = 0; i < size; i++) {
-            deltaX += 1;
-            deltaY += 1;
-            steps[i] = Cell.findBy(deltaX, deltaY);
+            x += (dest.getX() - x > 0) ? 1 : -1;
+            y += (dest.getY() - y > 0) ? 1 : -1;
+            steps[i] = Cell.findBy(x, y);
         }
         return steps;
     }
@@ -43,4 +43,5 @@ public class BishopBlack implements Figure {
     public Figure copy(Cell dest) {
         return new BishopBlack(dest);
     }
+
 }
